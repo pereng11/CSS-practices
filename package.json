@@ -1,7 +1,7 @@
 {
 	"scripts": {
 		"start": "concurrently \"cd %INIT_CWD% && npm run watch\" \"cd %INIT_CWD% && npm run serve\"",
-		"sass": "sass %INIT_CWD%/index.scss %INIT_CWD%/index.css",
+		"sass": "sass %INIT_CWD%/scss/index.scss %INIT_CWD%/index.css",
 		"nosource": "npm run sass -- --no-source-map",
 		"serve": "live-server --port=8001 %INIT_CWD%/",
 		"watch": "cd %INIT_CWD% && npm run sass -- --watch",
