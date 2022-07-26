@@ -1,8 +1,142 @@
-.test {
-  width: 2000px;
-  height: 200px;
-  background: red;
-  color: green;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", "Sans-serif";
+}
+
+.a11yHidden,
+legend {
+  overflow: hidden;
+  position: absolute !important;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
+
+.accentBook {
+  color: #abd375;
+}
+
+.accentNews {
+  color: #e8ca58;
+}
+
+.accentBoard {
+  color: #988574;
+}
+
+.accentFavorite {
+  color: #eea60a;
+}
+
+.accentTwitter {
+  color: #6aaee6;
+}
+
+.sprite {
+  min-height: 3.75rem;
+  background-image: url("./../assets/images/sprite_main.png");
+  background-repeat: no-repeat;
+  padding-left: ren(64px);
+}
+.spriteBook {
+  background-position: 0 0;
+}
+.spriteBoard {
+  background-position: 0 -115px;
+}
+.spriteNews {
+  background-position: 0 -230px;
+}
+.spriteFavorite {
+  background-position: 0 -345px;
+}
+.spriteTwitter {
+  background-position: 0 -460px;
+}
+
+body {
+  font-family: Muli;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+
+.panel:nth-child(1) {
+  background-image: url(https://i.pinimg.com/originals/b6/7f/6d/b67f6df35e4d30f49be0afa0df1680a2.jpg);
+}
+
+.panel:nth-child(2) {
+  background-image: url(https://i.pinimg.com/originals/e9/1b/6d/e91b6d2fd5aa62281e8402d0e2a0d3f1.jpg);
+}
+
+.panel:nth-child(3) {
+  background-image: url(https://i.pinimg.com/736x/bb/fa/27/bbfa2781344bf712ea9ee18a6bce2151--necromancer-mobile-wallpaper.jpg);
+}
+
+.panel:nth-child(4) {
+  background-image: url(https://pdfcoffee.com/img/the-book-of-random-tables-1920s-1930s-pdf-free.jpg);
+}
+
+.panel:nth-child(5) {
+  background-image: url(https://i.redd.it/ho0ygqy8x5e51.jpg);
+}
+
+.container {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 90vw;
+}
+
+.panel {
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 80vh;
+  border-radius: 50px;
+  color: #fff;
+  cursor: pointer;
+  flex-grow: 0.5;
+  margin: 10px;
+  position: relative;
+  transition: flex 200ms ease-in;
+}
+
+.panel h3 {
+  font-size: 24px;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
+  opacity: 0;
+}
+
+.panel.active {
+  flex-grow: 5;
+}
+
+.panel.active h3 {
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100vw;
+  }
+  .panel:nth-of-type(4),
+.panel:nth-of-type(5) {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */
