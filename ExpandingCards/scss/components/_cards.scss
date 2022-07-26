@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '../utils' as *;
 
 $urls: (
 	1:
@@ -21,6 +22,7 @@ body {
 	height: 100vh;
 	overflow: hidden;
 	margin: 0;
+	background-color: #181818;
 }
 
 @each $order, $url in $urls {
@@ -33,9 +35,13 @@ body {
 	display: flex;
 	flex-flow: row nowrap;
 	width: 90vw;
+	@media (max-width: 480px) {
+		width: 100vw;
+	}
 }
 
 .panel {
+	background-color: #000;
 	background-size: auto 100%;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -43,36 +49,33 @@ body {
 	border-radius: 50px;
 	color: #fff;
 	cursor: pointer;
-	flex-grow: 0.5;
-	margin: 10px;
+	flex: 1;
+	margin: em(10px);
 	position: relative;
-	transition: flex 200ms ease-in;
-}
+	transition: all 200ms ease-in;
 
-.panel h3 {
-	font-size: 24px;
-	position: absolute;
-	bottom: 20px;
-	left: 20px;
-	margin: 0;
-	opacity: 0;
-}
-
-.panel.active {
-	flex-grow: 5;
-}
-
-.panel.active h3 {
-	opacity: 1;
-}
-
-@media (max-width: 480px) {
-	.container {
-		width: 100vw;
+	span {
+		font-size: rem(30px);
+		font-weight: 700;
+		position: absolute;
+		bottom: rem(40px);
+		left: rem(40px);
+		margin: 0;
+		opacity: 0;
+		transition: all 300ms ease-in;
 	}
 
-	.panel:nth-of-type(4),
-	.panel:nth-of-type(5) {
-		display: none;
+	&.active {
+		flex-grow: 5;
+		span {
+			opacity: 1;
+		}
+	}
+
+	@media (max-width: 480px) {
+		&:nth-of-type(4),
+		&:nth-of-type(5) {
+			display: none;
+		}
 	}
 }
