@@ -1,0 +1,36 @@
+// sprite.scss
+@use 'sass:map';
+@use './color' as c;
+@use './unit' as *;
+
+$colors: (
+	'Book': c.$green,
+	'News': c.$yellow,
+	'Board': c.$brown,
+	'Favorite': c.$orange,
+	'Twitter': c.$blue,
+);
+
+@each $color, $color-value in $colors {
+	.accent#{$color} {
+		color: $color-value;
+	}
+}
+
+.sprite {
+	min-height: rem(60px);
+	background-image: url('./../assets/images/sprite_main.png');
+	background-repeat: no-repeat;
+	padding-left: ren(64px);
+
+	$sprites: Book, Board, News, Favorite, Twitter;
+	$x: 0;
+	$y: 0;
+
+	@each $sprite in $sprites {
+		&#{$sprite} {
+			background-position: $x $y;
+		}
+		$y: $y - 115px;
+	}
+}

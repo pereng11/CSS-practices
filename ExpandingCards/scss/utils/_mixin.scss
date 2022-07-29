@@ -1,0 +1,110 @@
+// mixin.scss
+@use 'sass:math';
+@use './unit' as *;
+@use './variable' as *;
+
+// 여백 관련 mixin
+@mixin autoMargin {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@mixin marginX($marginX) {
+	margin-left: rem($marginX);
+	margin-right: rem($marginX);
+}
+
+@mixin marginY($marginY) {
+	margin-top: rem($marginY);
+	margin-bottom: rem($marginY);
+}
+@mixin paddingX($paddingX) {
+	padding-left: rem($paddingX);
+	padding-right: rem($paddingX);
+}
+
+@mixin paddingY($paddingY) {
+	padding-top: rem($paddingY);
+	padding-bottom: rem($paddingY);
+}
+
+//position 관련 mixin
+@mixin pos($pos: absolute, $t: initial, $r: initial, $b: initial, $l: initial) {
+	position: $pos;
+	top: $t;
+	right: $r;
+	bottom: $b;
+	left: $l;
+}
+
+@mixin posCenterX($pos: absolute) {
+	@include pos($pos: $pos, $l: 50%);
+	transform: translateX(-50%);
+}
+@mixin posCenterY($pos: absolute) {
+	@include pos($pos: $pos, $t: 50%);
+	transform: translateY(-50%);
+}
+@mixin posCenter($pos: absolute) {
+	@include pos($pos: $pos, $t: 50%, $l: 50%);
+	transform: translate(-50%, -50%);
+}
+
+//박스의 최소 및 최대 너비를 설정하기 위한 mixin
+@mixin boxSizeMax($max: $container-width) {
+	max-width: $max;
+	@include autoMargin;
+}
+
+//말줄임표 mixin
+@mixin textEllipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+//반응형 iframe
+@mixin responseIframe($w: 16, $h: 9) {
+	position: relative;
+	width: 100%;
+	height: 0 !important;
+	padding-top: math.div($h, $w) * 100%;
+
+	iframe {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+	}
+}
+
+//float 이슈를 해결하기 위한 mixin - 구형 브라우저 호환
+@mixin clearFix {
+	&::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+}
+
+//배경 이미지 고해상도 디스플레이 호환
+@mixin bgRetina($file, $type) {
+	background-image: url('./../assets/images/' + $file + '.' + $type);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 144dpi) {
+		& {
+			background-image: url('./../assets/images/' + $file + '@2x.' + $type);
+		}
+	}
+}
+
+//텍스트 스타일 mixin
+@mixin textStyle($size) {
+	font-size: rem($size);
+	letter-spacing: -0.02em;
+	// line-height: 1.5;
+}

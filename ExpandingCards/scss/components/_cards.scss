@@ -1,0 +1,81 @@
+@use 'sass:map';
+@use '../utils' as *;
+
+$urls: (
+	1:
+		'https://i.pinimg.com/originals/b6/7f/6d/b67f6df35e4d30f49be0afa0df1680a2.jpg',
+	2:
+		'https://i.pinimg.com/originals/e9/1b/6d/e91b6d2fd5aa62281e8402d0e2a0d3f1.jpg',
+	3:
+		'https://i.pinimg.com/736x/bb/fa/27/bbfa2781344bf712ea9ee18a6bce2151--necromancer-mobile-wallpaper.jpg',
+	4:
+		'https://pdfcoffee.com/img/the-book-of-random-tables-1920s-1930s-pdf-free.jpg',
+	5: 'https://i.redd.it/ho0ygqy8x5e51.jpg',
+);
+
+body {
+	font-family: Muli;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	overflow: hidden;
+	margin: 0;
+	background-color: #181818;
+}
+
+@each $order, $url in $urls {
+	.panel:nth-child(#{$order}) {
+		background-image: url(#{$url});
+	}
+}
+
+.container {
+	display: flex;
+	flex-flow: row nowrap;
+	width: 90vw;
+	@media (max-width: 480px) {
+		width: 100vw;
+	}
+}
+
+.panel {
+	background-color: #000;
+	background-size: auto 100%;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 80vh;
+	border-radius: 50px;
+	color: #fff;
+	cursor: pointer;
+	flex: 1;
+	margin: em(10px);
+	position: relative;
+	transition: all 200ms ease-in;
+
+	span {
+		font-size: rem(30px);
+		font-weight: 700;
+		position: absolute;
+		bottom: rem(40px);
+		left: rem(40px);
+		margin: 0;
+		opacity: 0;
+		transition: all 300ms ease-in;
+	}
+
+	&.active {
+		flex-grow: 5;
+		span {
+			opacity: 1;
+		}
+	}
+
+	@media (max-width: 480px) {
+		&:nth-of-type(4),
+		&:nth-of-type(5) {
+			display: none;
+		}
+	}
+}

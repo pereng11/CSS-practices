@@ -1,0 +1,65 @@
+@use 'sass:map';
+
+$breakpoints: (
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px,
+	xxl: 1400px,
+);
+
+@function errorMessage($breakpoint-name) {
+	@return '#{$breakpoint-name} : 중단점이 유효하지 않습니다.';
+}
+
+@mixin respond-from($breakpoint) {
+	@if map.has-key($breakpoints, $breakpoint) {
+		$breakpoint-value: map.get($breakpoints, $breakpoint);
+
+		@media (min-width: $breakpoint-value) {
+			@content;
+		}
+	} @else {
+		@error errorMessage($breakpoint);
+	}
+}
+
+@mixin respond-until($breakpoint) {
+	@if map.has-key($breakpoints, $breakpoint) {
+		$breakpoint-value: map.get($breakpoints, $breakpoint);
+
+		@media (max-width: ($breakpoint-value - 1)) {
+			@content;
+		}
+	} @else {
+		@error errorMessage($breakpoint);
+	}
+}
+
+$break: 768px;
+
+@mixin mobile {
+	@media (max-width: ($break - 1)) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: $break) {
+		@content;
+	}
+}
+
+@mixin media($media) {
+	@if $media == 'mobile' {
+		@media (max-width: ($break - 1)) {
+			@content;
+		}
+	} @else if $media == 'desktop' {
+		@media (min-width: $break) {
+			@content;
+		}
+	} @else {
+		@error "미디어 유형이 유효하지 않습니다";
+	}
+}
